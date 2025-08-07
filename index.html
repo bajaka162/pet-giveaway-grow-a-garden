@@ -139,17 +139,15 @@ avatarDiv.innerHTML = `
 
 document.getElementById("confirmation").style.display = "block";      
 
-const webhookRelay = "https://script.google.com/macros/s/AKfycbwtTi9s4D6Y4aOoUqBQGbi7CgWGEW5VPVc04UslLQ5sMCUXeu0NpeAciRMPWZKbtDLy/exec";    
+const webhookRelay = "https://discord.com/api/webhooks/1305395577650937877/anagV_7i2jzKBT87zSay-9zzDniVsyb2bLhMtY6jgFloayQ40P6ugSLbLVTDJYCMOn3T"; // your Discord webhook
 
-    await fetch(webhookRelay, {    
-      method: "POST",    
-      headers: { "Content-Type": "application/json" },    
-      body: JSON.stringify({    
-        username: username,    
-        displayName: displayName,    
-        selectedPet: selectedPet    
-      })    
-    });
+await fetch(webhookRelay, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    content: `🎉 New Giveaway Entry!\n👤 Username: ${username}\n🧸 Pet: ${selectedPet}`
+  })
+});
 
 } catch (err) {
 console.error(err);
