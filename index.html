@@ -1,175 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pet Giveaway</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grow a Garden - Pet Giveaway</title>
   <style>
-    body {
-      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZQ5GG1BDHG80jzNDJRWhN7EWOnc--hk5MYQFk3tC1ybEurpbMmowfWWg&s=10') no-repeat center center fixed;
-      background-size: cover;
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }body {
+  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZQ5GG1BDHG80jzNDJRWhN7EWOnc--hk5MYQFk3tC1ybEurpbMmowfWWg&s=10') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
 
-    .pet {
-      margin: 20px auto;
-      padding: 10px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 10px;
-      width: 250px;
-    }
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
 
-    .pet img {
-      width: 100px;
-      border-radius: 8px;
-    }
+h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
 
-    input {
-      padding: 10px;
-      margin: 10px;
-      border-radius: 5px;
-      border: none;
-      width: 200px;
-    }
+a {
+  color: #00ffcc;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    button {
-      padding: 10px 20px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.pet {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin: 15px 0;
+  padding: 10px;
+}
 
-    #avatar {
-      margin-top: 15px;
-    }
+.pet img {
+  width: 100px;
+  border-radius: 10px;
+}
 
-    #successMsg {
-      margin-top: 20px;
-      display: none;
-    }
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  margin: 15px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
 
-    #successMsg img {
-      width: 150px;
-      margin-top: 10px;
-      border-radius: 12px;
-    }
+button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
-    a {
-      color: #00ffff;
-      font-weight: bold;
-    }
+#avatar {
+  margin: 10px 0;
+}
+
+#successMsg {
+  display: none;
+  margin-top: 20px;
+}
+
+#successMsg img {
+  width: 120px;
+}
+
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>🏱 Pet Giveaway</h1>
+    <p>Click to join live giveaway server: <a href="https://growagardenserver.carrd.co" target="_blank">https://growagardenserver.carrd.co</a></p><div class="pet">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpb6oYHh0OnNavALI-aLfRiHUO3vM6heMQQ&s" alt="Raccoon">
+  <h3>Raccoon</h3>
+  <p>Rarity: Rare</p>
+</div>
+<div class="pet">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVzQ1aBn_CVNcn0LM2lUpA5fMa-CjMucl7eg&s" alt="Kitsune">
+  <h3>Kitsune</h3>
+  <p>Rarity: Rare</p>
+</div>
+<div class="pet">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5hxIq8A9X1oLZ87I4pH0QOwYFLAbxnB85PA&s" alt="Disco Bee">
+  <h3>Disco Bee</h3>
+  <p>Rarity: Rare</p>
+</div>
+<div class="pet">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWhyGKkPY82zZSmTyMUv2lTV0MYzKnD5Bvb0-FaM5_Tw&s" alt="Butterfly">
+  <h3>Butterfly</h3>
+  <p>Rarity: Rare</p>
+</div>
 
-  <h1>🎁 Pet Giveaway 🎁</h1>
+<h2>Enter Your Username</h2>
+<input type="text" id="username" placeholder="Enter your Roblox username">
+<div id="avatar"></div>
+<button onclick="submitEntry()">Enter Giveaway</button>
 
-  <p>Click on link to join live server giveaway → <a href="https://growagardenserver.carrd.co" target="_blank">https://growagardenserver.carrd.co</a></p>
+<div id="successMsg">
+  <h3>🎉 You're entered in the giveaway!</h3>
+  <img src="https://media.tenor.com/TLdbGZJDTAUAAAAi/check.gif" alt="Success">
+</div>
 
-  <div class="pet">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpb6oYHh0OnNavALI-aLfRiHUO3vM6heMQQ&s" alt="Raccoon">
-    <h3>Raccoon</h3>
-    <p>Rarity: Rare</p>
-  </div>
+  </div>  <script>
+    const webhook = "https://discord.com/api/webhooks/1305395577650937877/anagV_7i2jzKBT87zSay-9zzDniVsyb2bLhMtY6jgFloayQ40P6ugSLbLVTDJYCMOn3T";
 
-  <div class="pet">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVzQ1aBn_CVNcn0LM2lUpA5fMa-CjMucl7eg&s" alt="Kitsune">
-    <h3>Kitsune</h3>
-    <p>Rarity: Rare</p>
-  </div>
+    const usernameInput = document.getElementById("username");
+    const avatar = document.getElementById("avatar");
+    const successMsg = document.getElementById("successMsg");
 
-  <div class="pet">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5hxIq8A9X1oLZ87I4pH0QOwYFLAbxnB85PA&s" alt="Disco Bee">
-    <h3>Disco Bee</h3>
-    <p>Rarity: Rare</p>
-  </div>
-
-  <div class="pet">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWhyGKkPY82zZSmTyMUv2lTV0MYzKnD5Bvb0-FaM5_Tw&s" alt="Butterfly">
-    <h3>Butterfly</h3>
-    <p>Rarity: Rare</p>
-  </div>
-
-  <h2>Enter Your Username</h2>
-  <input type="text" id="username" placeholder="Roblox Username">
-  <br>
-  <div id="avatar"></div>
-  <button onclick="sendToWebhook()">Enter Giveaway</button>
-
-  <div id="successMsg">
-    <h3>🎉 You're entered in the giveaway!</h3>
-    <img src="https://media.tenor.com/TLdbGZJDTAUAAAAi/check.gif" alt="Success">
-  </div>
-
-  <script>
-    const webhookURL = 'https://discord.com/api/webhooks/1305395577650937877/anagV_7i2jzKBT87zSay-9zzDniVsyb2bLhMtY6jgFloayQ40P6ugSLbLVTDJYCMOn3T';
-
-    const usernameInput = document.getElementById('username');
-    const avatarDiv = document.getElementById('avatar');
-    const successMsg = document.getElementById('successMsg');
-
-    usernameInput.addEventListener('input', async () => {
+    usernameInput.addEventListener("input", async () => {
       const username = usernameInput.value.trim();
       if (username.length < 3) {
-        avatarDiv.innerHTML = '';
+        avatar.innerHTML = "";
         return;
       }
-
-      const res = await fetch(`https://users.roblox.com/v1/usernames/users`, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({usernames: [username]})
-      });
-
-      const data = await res.json();
-      if (data && data.data && data.data[0]) {
-        const user = data.data[0];
-        avatarDiv.innerHTML = `
-          <p>Found user: ${user.displayName}</p>
-          <img src="https://www.roblox.com/headshot-thumbnail/image?userId=${user.id}&width=150&height=150&format=png" />
-        `;
-      } else {
-        avatarDiv.innerHTML = '<p style="color:red">Username not found</p>';
-      }
-    });
-
-    async function sendToWebhook() {
-      const username = usernameInput.value.trim();
-      if (!username) return alert("Please enter your username");
-
-      const payload = {
-        content: `🎉 New giveaway entry from **${username}**!`
-      };
-
-      await fetch(webhookURL, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
-      });
-
-      // Show success message
-      successMsg.style.display = 'block';
-    }
-  </script>
-
-</body>
-</html>
-      await fetch(webhook, {
+      const res = await fetch("https://users.roblox.com/v1/usernames/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ usernames: [username] }),
+      });
+      const data = await res.json();
+      if (data.data.length && data.data[0]) {
+        const user = data.data[0];
+        avatar.innerHTML = `<img src="https://www.roblox.com/headshot-thumbnail/image?userId=${user.id}&width=150&height=150&format=png" alt="Avatar">`;
+      } else {
+        avatar.innerHTML = `<p style="color: red">User not found</p>`;
+      }
+    });
+
+    async function submitEntry() {
+      const username = usernameInput.value.trim();
+      if (!username) return alert("Please enter your Roblox username");
+
+      await fetch(webhook, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({
-          content: `🎁 New giveaway entry: **${username}**`
+          content: `New giveaway entry from **${username}**`
         })
       });
 
-      alert("Your username has been submitted!");
-      form.reset();
-    });
+      successMsg.style.display = "block";
+    }
   </script></body>
 </html>
