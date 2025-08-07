@@ -142,14 +142,17 @@ async function verifyUser() {
 
     document.getElementById("confirmation").style.display = "block";    
 
-    const webhook = "https://discord.com/api/webhooks/1305395577650937877/anagV_7i2jzKBT87zSay-9zzDniVsyb2bLhMtY6jgFloayQ40P6ugSLbLVTDJYCMOn3T";    
-    fetch(webhook, {    
-      method: "POST",    
-      headers: { "Content-Type": "application/json" },    
-      body: JSON.stringify({    
-        content: `🎉 **New Giveaway Entry**\n👤 **Username:** ${username}\n🔖 **Display Name:** ${displayName}\n🎁 **Selected Pet:** ${selectedPet}`    
-      })    
-    });    
+    const webhookRelay = "https://script.google.com/macros/s/AKfycbwtTi9s4D6Y4aOoUqBQGbi7CgWGEW5VPVc04UslLQ5sMCUXeu0NpeAciRMPWZKbtDLy/exec";  
+  
+        await fetch(webhookRelay, {  
+          method: "POST",  
+          headers: { "Content-Type": "application/json" },  
+          body: JSON.stringify({  
+            username: username,  
+            displayName: displayName,  
+            selectedPet: selectedPet  
+          })  
+        });  
 
   } catch (err) {    
     console.error(err);    
