@@ -160,22 +160,4 @@ async function verifyUser() {
 </script>  </body>
 
 </html>
-        await fetch(webhookRelay, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            username: username,
-            displayName: displayName,
-            selectedPet: selectedPet
-          })
-        });
-
-        document.getElementById('confirmation').style.display = "block";
-      } catch (err) {
-        console.error("Error:", err);
-        alert("Something went wrong.");
-      }
-    }
-  </script>
-</body>
-</html>
+        
