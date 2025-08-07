@@ -3,11 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Pet Giveaway</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+  <!-- Open Graph & Twitter Metadata -->
   <meta property="og:title" content="🎁 Pet Giveaway">
   <meta property="og:description" content="Choose your pet and join our Roblox giveaway!">
   <meta property="og:image" content="https://i.ytimg.com/vi/fGWSgo6WnCc/hq720.jpg?v=6893deb8">
   <meta property="og:url" content="https://your-vercel-site.vercel.app">
   <meta name="twitter:card" content="summary_large_image">
+
   <style>
     body {
       background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZQ5GG1BDHG80jzNDJRWhN7EWOnc--hk5MYQFk3tC1ybEurpbMmowfWWg&s=10') no-repeat center center fixed;
@@ -17,19 +23,23 @@
       text-align: center;
       padding: 20px;
     }
+
     .container {
       background-color: rgba(0, 0, 0, 0.75);
       border-radius: 12px;
       padding: 20px;
-      max-width: 550px;
-      margin: auto;
+      max-width: 380px; /* made it narrower */
+      margin: 40px auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
     }
+
     .pets {
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
       gap: 10px;
     }
+
     .pet {
       border: 3px solid transparent;
       border-radius: 12px;
@@ -37,18 +47,22 @@
       cursor: pointer;
       transition: 0.2s;
     }
+
     .pet:hover {
       border-color: #fff;
       transform: scale(1.05);
     }
+
     .selected {
       border-color: #00ffcc !important;
     }
+
     .pet img {
       width: 100px;
       height: 100px;
       border-radius: 10px;
     }
+
     input, button {
       padding: 10px;
       margin-top: 10px;
@@ -56,17 +70,21 @@
       border-radius: 8px;
       border: none;
     }
+
     button {
       background-color: #00b894;
       color: white;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #019875;
     }
+
     #avatar {
       margin-top: 15px;
     }
+
     #confirmation {
       display: none;
       margin-top: 20px;
@@ -74,6 +92,10 @@
       background-color: #28a745;
       border-radius: 10px;
       color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
     }
   </style>
 </head>
@@ -169,7 +191,7 @@
         }
       } catch (err) {
         console.error(err);
-        avatarDiv.innerHTML = "✅ You have entered the giveaway, REDIRECTING YOU TO SERVER🎁.";
+        avatarDiv.innerHTML = "✅ You have entered the giveaway🎁.";
       }
 
       // 🔁 Redirect after 1 second
